@@ -13,13 +13,14 @@
         h1 { font-size: 2.5em; margin-bottom: 10px; }
         h2 { font-size: 2em; margin-top: 0; }
         .logo { font-size: 1.5em; font-weight: bold; }
-        .btn { background-color: #0057b7; color: white; padding: 15px 30px; text-decoration: none; display: inline-block; border-radius: 5px; font-size: 1.2em; margin: 10px auto; }
         .features, .steps, .faq { max-width: 800px; margin: 0 auto; text-align: left; }
         ul { list-style: none; padding: 0; }
         li { padding: 10px 0; }
         footer { background-color: #0057b7; color: white; padding: 20px; text-align: center; font-size: 0.9em; }
         .social a { color: white; margin: 0 10px; text-decoration: none; font-size: 1.2em; }
-        @media (max-width: 600px) { h1 { font-size: 1.8em; } h2 { font-size: 1.5em; } .btn { padding: 10px 20px; font-size: 1em; } }
+        @media (max-width: 600px) { h1 { font-size: 1.8em; } h2 { font-size: 1.5em; } }
+        .blue-button { background-color: #3483FA; color: white; padding: 10px 24px; text-decoration: none; border-radius: 5px; display: inline-block; font-size: 16px; transition: background-color 0.3s; font-family: Arial, sans-serif; }
+        .blue-button:hover { background-color: #2a68c8; }
     </style>
 </head>
 <body>
@@ -27,11 +28,7 @@
         <div class="logo">✨ AnúncioFácil IA ✨</div>
         <h1>Crie anúncios perfeitos para Mercado Livre em minutos</h1>
         <p>Desperte suas vendas com inteligência artificial + imagens profissionais</p>
-        <form action="#">
-            <script src="https://www.mercadopago.com.br/integrations/v1/web-payment-checkout.js"
-                data-preference-id="35702766-62d6c121-26ef-4920-8bd9-9de9fa6ed9d9" data-source="button">
-            </script>
-        </form>
+        <a href="https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808496d4b6670196d4e40901001b" name="MP-payButton" class='blue-button'>Assinar Agora</a>
         <p style="margin-top:10px;">🔒 Pagamento 100% seguro via Mercado Pago</p>
     </header>
 
@@ -68,11 +65,7 @@
     <section>
         <h2>Plano</h2>
         <p>🔥 7 dias grátis + R$ 29,90/mês depois<br>Sem compromisso. Cancele quando quiser.</p>
-        <form action="#">
-            <script src="https://www.mercadopago.com.br/integrations/v1/web-payment-checkout.js"
-                data-preference-id="35702766-62d6c121-26ef-4920-8bd9-9de9fa6ed9d9" data-source="button">
-            </script>
-        </form>
+        <a href="https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808496d4b6670196d4e40901001b" name="MP-payButton" class='blue-button'>Assinar Agora</a>
     </section>
 
     <section>
@@ -95,5 +88,22 @@
         </div>
         <p>&copy; 2025 AnúncioFácil IA | Todos os direitos reservados</p>
     </footer>
+
+    <script type="text/javascript">
+       (function() {
+          function $MPC_load() {
+             window.$MPC_loaded !== true && (function() {
+             var s = document.createElement("script");
+             s.type = "text/javascript";
+             s.async = true;
+             s.src = document.location.protocol + "//secure.mlstatic.com/mptools/render.js";
+             var x = document.getElementsByTagName('script')[0];
+             x.parentNode.insertBefore(s, x);
+             window.$MPC_loaded = true;
+          })();
+       }
+       window.$MPC_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;
+       })();
+    </script>
 </body>
 </html>
