@@ -1,1 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AnúncioFácil IA</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fff7ed;
+        }
+        header {
+            background-color: #ffbe00;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        header p {
+            margin: 8px 0 0;
+            font-size: 1.2em;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .highlight {
+            font-weight: bold;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            display: inline-block;
+            color: #333;
+        }
+        ul li::before {
+            content: "✔️ ";
+            color: rebeccapurple;
+        }
+        .benefits, .problems {
+            margin-top: 20px;
+        }
+        .image-comparison {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 50px;
+            margin: 30px 0;
+        }
+        .image-comparison div {
+            text-align: center;
+        }
+        .image-comparison img {
+            width: 180px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+        }
+        .button-area {
+            text-align: center;
+            margin: 40px 0 20px;
+        }
+        .subscribe-button {
+            background-color: #3483FA;
+            color: white;
+            padding: 12px 28px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.9em;
+            margin-bottom: 60px;
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            z-index: 999;
+        }
+        .whatsapp-float img {
+            width: 48px;
+            height: 48px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AnúncioFácil IA</h1>
+        <p>Seu assistente de IA para criação de anúncios no Mercado Livre e Shopee.</p>
+    </header>
 
+    <div class="container">
+        <p>
+            Você é vendedor do Mercado Livre ou Shopee e perde tempo criando anúncios?
+            O <span class="highlight">AnúncioFácil IA</span> é a solução que você precisa!
+        </p>
+        <p>
+            Nosso assistente de inteligência artificial cria <span class="highlight">descrições profissionais com SEO</span>
+            e <span class="highlight">imagens realistas</span> automaticamente. Basta preencher as informações do produto
+            e você recebe o conteúdo pronto para <span class="highlight">copiar e colar</span> no seu anúncio.
+        </p>
+
+        <div class="problems">
+            <h2>Problemas que resolvemos:</h2>
+            <ul>
+                <li>Perda de tempo criando descrições</li>
+                <li>Imagens amadoras que afastam clientes</li>
+                <li>Dificuldade em destacar seus produtos</li>
+            </ul>
+        </div>
+
+        <div class="benefits">
+            <h2>Benefícios do Assistente de IA:</h2>
+            <ul>
+                <li>Cria descrições com SEO</li>
+                <li>Gera imagens realistas com IA</li>
+                <li>Entrega 5 títulos otimizados com palavras-chave</li>
+                <li>Conteúdo pronto para copiar e colar</li>
+            </ul>
+        </div>
+
+        <h2>Antes e Depois:</h2>
+        <div class="image-comparison">
+            <div>
+                <strong>ANTES</strong><br>
+                <img src="images/antes.jpg" alt="Antes da IA">
+            </div>
+            <div>
+                <strong>DEPOIS</strong><br>
+                <img src="images/depois.jpg" alt="Depois da IA">
+            </div>
+        </div>
+
+        <div class="button-area">
+            <a href="https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808496d4b6670196d4e40901001b"
+               class="subscribe-button" target="_blank">Assinar e Acessar Agora</a>
+        </div>
+
+        <footer>
+            Pagamento seguro via Mercado Pago. Teste grátis por 7 dias.<br>
+            Instagram • TikTok
+        </footer>
+    </div>
+
+    <a class="whatsapp-float" href="https://wa.me/5511967652289" target="_blank">
+        <img src="images/whatsapp-icon.png" alt="WhatsApp">
+    </a>
+</body>
+</html>
