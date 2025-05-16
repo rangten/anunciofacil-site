@@ -2,90 +2,117 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Crie anúncios otimizados com descrições e imagens geradas por IA para o Mercado Livre.">
   <title>AnúncioFácil IA</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      padding: 0;
-      background-color: #f8f9fa;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8f9fa;
       color: #333;
       text-align: center;
     }
-    header {
-      background-color: #3483FA;
+    .hero {
+      background-color: #2f80ed;
       color: white;
-      padding: 40px 20px;
+      padding: 60px 20px 30px;
     }
-    h1 {
-      margin: 0;
-      font-size: 2.5em;
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
     }
-    .content {
-      padding: 30px 20px;
-      max-width: 900px;
-      margin: auto;
+    .hero p {
+      font-size: 1.2rem;
     }
-    .before-after {
+    .section {
+      margin: 40px 20px;
+    }
+    .comparison {
       display: flex;
       justify-content: center;
-      gap: 30px;
+      gap: 40px;
+      margin-top: 20px;
       flex-wrap: wrap;
-      margin-top: 30px;
     }
-    .before-after img {
-      width: 300px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    .comparison div {
+      text-align: center;
     }
-    .button {
-      background-color: #3483FA;
-      color: white;
-      padding: 16px 32px;
-      font-size: 18px;
-      text-decoration: none;
-      border-radius: 6px;
-      margin-top: 40px;
-      display: inline-block;
+    .comparison img {
+      width: 220px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     .footer {
-      margin-top: 50px;
-      font-size: 14px;
-      color: #777;
+      font-size: 0.9rem;
+      color: #666;
+      margin: 40px 0 20px;
+    }
+    .blue-button {
+      background-color: #3483FA;
+      color: white;
+      padding: 10px 24px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+      font-size: 16px;
+      transition: background-color 0.3s;
+      font-family: Arial, sans-serif;
+      margin-top: 40px;
+    }
+    .blue-button:hover {
+      background-color: #2a68c8;
     }
   </style>
 </head>
 <body>
-
-  <header>
+  <div class="hero">
     <h1>AnúncioFácil IA 🚀</h1>
     <p>Transforme seus anúncios com inteligência artificial!</p>
-  </header>
-
-  <div class="content">
-    <p>Veja o poder da IA na prática! Abaixo, você confere imagens reais antes e depois da otimização automática feita pelo nosso sistema:</p>
-
-    <div class="before-after">
-      <div>
-        <p><strong>ANTES</strong></p>
-        <img src="https://via.placeholder.com/300x400?text=ANTES" alt="Imagem antes">
-      </div>
-      <div>
-        <p><strong>DEPOIS</strong></p>
-        <img src="https://via.placeholder.com/300x400?text=DEPOIS" alt="Imagem depois">
-      </div>
-    </div>
-
-    <a class="button" href="https://kiwify.app/0P4BgJC" target="_blank" rel="noopener noreferrer">
-      Assinar e Acessar Agora
-    </a>
-
-    <div class="footer">
-      🔒 Pagamento seguro via Kiwify. Teste grátis por 7 dias.
-    </div>
   </div>
 
+  <div class="section">
+    <p>Veja o poder da IA na prática! Abaixo, você confere imagens reais antes e depois da otimização automática feita pelo nosso sistema:</p>
+    <div class="comparison">
+      <div>
+        <strong>ANTES</strong><br />
+        <img src="images/antes.png" alt="Imagem antes" />
+      </div>
+      <div>
+        <strong>DEPOIS</strong><br />
+        <img src="images/depois.png" alt="Imagem depois" />
+      </div>
+    </div>
+
+    <a href="https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808496d4b6670196d4e40901001b" name="MP-payButton" class="blue-button">Assinar e Acessar Agora</a>
+  </div>
+
+  <div class="footer">
+    🔒 Pagamento 100% seguro via Mercado Pago. Teste grátis por 7 dias.
+  </div>
+
+  <script type="text/javascript">
+    (function() {
+      function $MPC_load() {
+        window.$MPC_loaded !== true && (function() {
+          var s = document.createElement("script");
+          s.type = "text/javascript";
+          s.async = true;
+          s.src = document.location.protocol + "//secure.mlstatic.com/mptools/render.js";
+          var x = document.getElementsByTagName('script')[0];
+          x.parentNode.insertBefore(s, x);
+          window.$MPC_loaded = true;
+        })();
+      }
+      window.$MPC_loaded !== true
+        ? (window.attachEvent
+            ? window.attachEvent("onload", $MPC_load)
+            : window.addEventListener("load", $MPC_load, false))
+        : null;
+    })();
+  </script>
 </body>
 </html>
