@@ -1,146 +1,68 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnúncioFácil IA</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #fff9f0;
-            color: #333;
-            text-align: center;
-        }
-        header {
-            background-color: #ffc400;
-            padding: 30px 10px 10px 10px;
-        }
-        h1 {
-            color: #222;
-            font-size: 36px;
-        }
-        .subtitulo {
-            font-size: 18px;
-            margin-top: -10px;
-        }
-        section {
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: left;
-        }
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        ul li::before {
-            content: "✔️";
-            margin-right: 8px;
-            color: #6633cc;
-        }
-        .benefits, .problems {
-            margin-bottom: 30px;
-        }
-        .before-after {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin: 30px auto;
-            max-width: 600px;
-        }
-        .before-after img {
-            width: 200px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .button {
-            display: inline-block;
-            background-color: #3483FA;
-            color: white;
-            padding: 14px 24px;
-            text-decoration: none;
-            font-size: 16px;
-            margin-top: 30px;
-            border-radius: 6px;
-        }
-        footer {
-            font-size: 14px;
-            margin-top: 30px;
-            color: #888;
-            padding-bottom: 80px;
-        }
-        .whatsapp-float {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            z-index: 100;
-        }
-        .whatsapp-float img {
-            width: 48px;
-            height: 48px;
-        }
-        .social-links {
-            text-align: center;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Preços</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    .calculator-container { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+    h2 { margin-top: 0; }
+    label { display: block; margin-bottom: 10px; }
+    input { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+    button { width: 100%; padding: 10px; margin-top: 10px; background: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    #results { margin-top: 20px; }
+    ul { list-style: none; padding: 0; }
+    li { margin-bottom: 8px; }
+  </style>
 </head>
 <body>
-
-<header>
-    <h1>AnúncioFácil IA 🚀</h1>
-    <div class="subtitulo">Seu assistente de IA para criação de anúncios no Mercado Livre e Shopee.</div>
-</header>
-
-<section>
-    <p>Você é vendedor do Mercado Livre ou Shopee e perde tempo criando anúncios? O <strong>AnúncioFácil IA</strong> é a solução que você precisa!</p>
-    <p>Nosso assistente de inteligência artificial cria <strong>descrições profissionais com SEO</strong> e <strong>imagens realistas</strong> automaticamente. Basta preencher as informações do produto e você recebe o conteúdo pronto para <strong>copiar e colar</strong> no seu anúncio.</p>
-
-    <div class="problems">
-        <h2>Problemas que resolvemos:</h2>
-        <ul>
-            <li>Perda de tempo criando descrições</li>
-            <li>Imagens amadoras que afastam clientes</li>
-            <li>Dificuldade em destacar seus produtos</li>
-        </ul>
+  <div class="calculator-container">
+    <h2>Calculadora de Preços</h2>
+    <label>
+      Custo do Produto (R$):
+      <input type="number" id="cost" step="0.01" placeholder="Ex: 50.00" />
+    </label>
+    <label>
+      Frete (R$):
+      <input type="number" id="shipping" step="0.01" placeholder="Ex: 10.00" />
+    </label>
+    <label>
+      Margem de Lucro (%):
+      <input type="number" id="margin" step="0.1" placeholder="Ex: 20" />
+    </label>
+    <button id="calculate-btn">Calcular</button>
+    <div id="results" style="display:none;">
+      <h3>Preço Sugerido:</h3>
+      <ul>
+        <li>Shopee: R$ <span id="shopee-price">0.00</span></li>
+        <li>Mercado Livre: R$ <span id="ml-price">0.00</span></li>
+        <li>Shein: R$ <span id="shein-price">0.00</span></li>
+      </ul>
     </div>
+  </div>
+  <script>
+    // Taxas de comissão: Shopee 10%, Mercado Livre 16%, Shein 15%
+    const rates = { shopee: 0.10, ml: 0.16, shein: 0.15 };
 
-    <div class="benefits">
-        <h2>Benefícios do Assistente de IA:</h2>
-        <ul>
-            <li>Cria descrições com SEO</li>
-            <li>Gera imagens realistas com IA</li>
-            <li>Entrega 5 títulos otimizados com palavras-chave</li>
-            <li>Conteúdo pronto para copiar e colar</li>
-        </ul>
-    </div>
+    document.getElementById('calculate-btn').addEventListener('click', () => {
+      const cost = parseFloat(document.getElementById('cost').value) || 0;
+      const shipping = parseFloat(document.getElementById('shipping').value) || 0;
+      const marginPct = (parseFloat(document.getElementById('margin').value) || 0) / 100;
 
-    <h2>Antes e Depois:</h2>
-    <div class="before-after">
-        <div>
-            <strong>ANTES</strong><br>
-            <img src="images/antes.png" alt="Antes da IA">
-        </div>
-        <div>
-            <strong>DEPOIS</strong><br>
-            <img src="images/depois.png" alt="Depois da IA">
-        </div>
-    </div>
+      const baseCost = cost + shipping;
+      const priceWithMargin = baseCost * (1 + marginPct);
 
-    <a href="https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808496d4b6670196d4e40901001b" class="button">Assinar e Acessar Agora</a>
-</section>
+      const shopeePrice = priceWithMargin / (1 - rates.shopee);
+      const mlPrice = priceWithMargin / (1 - rates.ml);
+      const sheinPrice = priceWithMargin / (1 - rates.shein);
 
-<footer>
-    Pagamento seguro via Mercado Pago. Teste grátis por 7 dias.
-    <div class="social-links">Instagram • TikTok</div>
-</footer>
-
-<a class="whatsapp-float" href="https://wa.me/5511967652289" target="_blank">
-    <img src="images/whatsapp-logo.png" alt="WhatsApp">
-</a>
-
+      document.getElementById('shopee-price').textContent = shopeePrice.toFixed(2);
+      document.getElementById('ml-price').textContent = mlPrice.toFixed(2);
+      document.getElementById('shein-price').textContent = sheinPrice.toFixed(2);
+      document.getElementById('results').style.display = 'block';
+    });
+  </script>
 </body>
 </html>
