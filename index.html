@@ -2,213 +2,83 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <title>AnúncioFácil IA</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #fff8ee;
-        }
-        header {
-            background: #ffc400;
-            color: #1a1a1a;
-            padding: 30px 20px;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 32px;
-        }
-        header p {
-            margin-top: 10px;
-            font-size: 18px;
-        }
-        section {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        h2 {
-            color: #333;
-        }
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        li::before {
-            content: '✔️';
-            margin-right: 10px;
-            color: #673ab7;
-        }
-        .antes-depois {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        .antes-depois div {
-            text-align: center;
-            margin: 10px;
-        }
-        .antes-depois img {
-            width: 250px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .cta {
-            text-align: center;
-            margin: 40px 0;
-        }
-        .cta a {
-            background: #3483FA;
-            color: white;
-            padding: 14px 30px;
-            text-decoration: none;
-            font-size: 16px;
-            border-radius: 6px;
-        }
-        .footer {
-            text-align: center;
-            font-size: 14px;
-            padding: 20px;
-            background: #fff2dc;
-        }
-        .footer span {
-            margin: 0 10px;
-        }
-        #whatsapp-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 52px;
-            height: 52px;
-            z-index: 1000;
-        }
-        #whatsapp-btn img {
-            width: 100%;
-        }
-        .calculadora {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.05);
-            max-width: 600px;
-            margin: 60px auto;
-        }
-        .calculadora input, .calculadora select {
-            width: 100%;
-            padding: 8px;
-            margin: 8px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .calculadora button {
-            background: #3483FA;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            margin-top: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .resultado {
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AnúncioFácil PRO</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+    header {
+      background-color: #ffc400;
+      padding: 30px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    header p {
+      margin-top: 10px;
+      font-size: 1.2em;
+    }
+    main {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    a.btn {
+      display: block;
+      padding: 16px;
+      background-color: #3483FA;
+      color: white;
+      text-decoration: none;
+      font-size: 1.1em;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+    a.btn:hover {
+      background-color: #1f5fd6;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #eee;
+      font-size: 0.9em;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <h1>AnúncioFácil IA 🚀</h1>
-    <p>Seu assistente de IA para criação de anúncios no Mercado Livre e Shopee.</p>
-</header>
+  <header>
+    <h1>AnúncioFácil PRO</h1>
+    <p>Simplifique a criação e gestão dos seus anúncios no Mercado Livre e Shopee</p>
+  </header>
 
-<section>
-    <h2>Problemas que resolvemos:</h2>
-    <ul>
-        <li>Perda de tempo criando descrições</li>
-        <li>Imagens amadoras que afastam clientes</li>
-        <li>Dificuldade em destacar seus produtos</li>
-    </ul>
-
-    <h2>Benefícios do Assistente de IA:</h2>
-    <ul>
-        <li>Cria descrições com SEO</li>
-        <li>Gera imagens realistas com IA</li>
-        <li>Entrega 5 títulos otimizados com palavras-chave</li>
-        <li>Conteúdo pronto para copiar e colar</li>
-    </ul>
-
-    <h2>Antes e Depois:</h2>
-    <div class="antes-depois">
-        <div>
-            <strong>ANTES</strong><br>
-            <img src="ANTES.webp" alt="Antes da IA">
-        </div>
-        <div>
-            <strong>DEPOIS</strong><br>
-            <img src="DEPOIS.png" alt="Depois da IA">
-        </div>
+  <main>
+    <h2>Acesse as ferramentas:</h2>
+    <div class="btn-grid">
+      <a href="vendas.html" class="btn">📊 Análise de Vendas</a>
+      <a href="concorrencia.html" class="btn">🔍 Comparar Concorrência</a>
+      <a href="assistente.html" class="btn">🤖 Assistente de IA</a>
+      <a href="calculadora.html" class="btn">🧮 Calculadora de Lucro</a>
     </div>
-</section>
+  </main>
 
-<div class="cta">
-    <a href="https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808496d4b6670196d4e40901001b" target="_blank">Assinar e Acessar Agora</a>
-</div>
-
-<section class="calculadora">
-    <h2>Calculadora de Preços</h2>
-    <label>Marketplace:</label>
-    <select id="marketplace">
-        <option value="shopee">Shopee</option>
-        <option value="mercado">Mercado Livre</option>
-        <option value="shein">Shein</option>
-    </select>
-    <label>Custo do Produto (R$):</label>
-    <input type="number" id="custo" value="20">
-    <label>Acréscimo (R$):</label>
-    <input type="number" id="acrescimo" value="5">
-    <label>Taxa da Plataforma (%):</label>
-    <input type="number" id="taxa" value="16">
-    <label>Impostos (%):</label>
-    <input type="number" id="imposto" value="8">
-    <label>Margem de Lucro (%):</label>
-    <input type="number" id="lucro" value="20">
-    <button onclick="calcular()">Calcular</button>
-    <div class="resultado" id="resultado"></div>
-</section>
-
-<footer class="footer">
-    Pagamento seguro via Mercado Pago. Teste grátis por 7 dias.<br>
-    <span>Instagram</span> · <span>TikTok</span>
-</footer>
-
-<a id="whatsapp-btn" href="https://wa.me/5511967652289" target="_blank">
-    <img src="whatsapp-logo.png" alt="WhatsApp">
-</a>
-
-<script>
-    function calcular() {
-        const custo = parseFloat(document.getElementById("custo").value);
-        const acrescimo = parseFloat(document.getElementById("acrescimo").value);
-        const taxa = parseFloat(document.getElementById("taxa").value) / 100;
-        const imposto = parseFloat(document.getElementById("imposto").value) / 100;
-        const lucro = parseFloat(document.getElementById("lucro").value) / 100;
-
-        const base = custo + acrescimo;
-        const venda = base / (1 - taxa - imposto - lucro);
-        const ganho = venda - base;
-
-        document.getElementById("resultado").innerHTML = `
-            <p><strong>Preço de Venda:</strong> R$ ${venda.toFixed(2)}</p>
-            <p><strong>Lucro por unidade:</strong> R$ ${ganho.toFixed(2)}</p>
-        `;
-    }
-</script>
+  <footer>
+    &copy; 2024 AnúncioFácil PRO. Desenvolvido para vendedores de sucesso.
+  </footer>
 
 </body>
 </html>
