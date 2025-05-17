@@ -2,150 +2,104 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AnúncioFácil IA</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #fff8f0;
-      color: #222;
-    }
-    header {
-      background-color: #ffc107;
-      text-align: center;
-      padding: 30px 10px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
-      color: #333;
-    }
-    header p {
-      margin: 5px 0 0;
-      font-size: 1.2em;
-    }
-    main {
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    h2 {
-      margin-top: 40px;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    ul li::before {
-      content: '✔️';
-      margin-right: 10px;
-      color: #6a0dad;
-    }
-    .before-after {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      margin: 30px 0;
-      flex-wrap: wrap;
-    }
-    .before-after div {
-      text-align: center;
-      margin: 10px;
-    }
-    .before-after img {
-      max-width: 220px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .button {
-      display: block;
-      width: fit-content;
-      margin: 30px auto;
-      padding: 14px 28px;
-      background-color: #3483FA;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      text-decoration: none;
-      text-align: center;
-    }
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      padding: 20px;
-      font-size: 0.9em;
-    }
-    .whatsapp {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      z-index: 1000;
-    }
-    .whatsapp img {
-      width: 40px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Calculadora de Preços</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .calculator {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+        input, select {
+            padding: 10px;
+            width: 100%;
+            margin-top: 5px;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e6ffe6;
+            border: 1px solid #b2ffb2;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #3483FA;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+    <div class="calculator">
+        <h1>Calculadora de Preços</h1>
+        <label for="marketplace">Marketplace:</label>
+        <select id="marketplace">
+            <option value="shopee">Shopee</option>
+            <option value="mercado_livre">Mercado Livre</option>
+            <option value="shein">Shein</option>
+        </select>
 
-<header>
-  <h1>AnúncioFácil IA 🚀</h1>
-  <p>Seu assistente de IA para criação de anúncios no Mercado Livre e Shopee.</p>
-</header>
+        <label for="custo">Custo do Produto (R$):</label>
+        <input type="number" id="custo" value="20">
 
-<main>
-  <section>
-    <p>Você é vendedor do Mercado Livre ou Shopee e perde tempo criando anúncios? O <strong>AnúncioFácil IA</strong> é a solução que você precisa!</p>
-    <p>Nosso assistente de inteligência artificial cria <strong>descrições profissionais com SEO</strong> e <strong>imagens realistas</strong> automaticamente. Basta preencher as informações do produto e você recebe o conteúdo pronto para <strong>copiar e colar</strong> no seu anúncio.</p>
-  </section>
+        <label for="acrescimo">Acréscimo (R$):</label>
+        <input type="number" id="acrescimo" value="5">
 
-  <section>
-    <h2>Problemas que resolvemos:</h2>
-    <ul>
-      <li>Perda de tempo criando descrições</li>
-      <li>Imagens amadoras que afastam clientes</li>
-      <li>Dificuldade em destacar seus produtos</li>
-    </ul>
-  </section>
+        <label for="taxa">Taxa da Plataforma (%):</label>
+        <input type="number" id="taxa" value="16">
 
-  <section>
-    <h2>Benefícios do Assistente de IA:</h2>
-    <ul>
-      <li>Cria descrições com SEO</li>
-      <li>Gera imagens realistas com IA</li>
-      <li>Entrega 5 títulos otimizados com palavras-chave</li>
-      <li>Conteúdo pronto para copiar e colar</li>
-    </ul>
-  </section>
+        <label for="impostos">Impostos (%):</label>
+        <input type="number" id="impostos" value="8">
 
-  <section>
-    <h2>Antes e Depois:</h2>
-    <div class="before-after">
-      <div>
-        <strong>ANTES</strong><br>
-        <img src="antes.png" alt="Antes da IA">
-      </div>
-      <div>
-        <strong>DEPOIS</strong><br>
-        <img src="depois.png" alt="Depois da IA">
-      </div>
+        <label for="lucro">Margem de Lucro (%):</label>
+        <input type="number" id="lucro" value="20">
+
+        <button onclick="calcular()">Calcular</button>
+
+        <div class="result" id="resultado"></div>
     </div>
-  </section>
 
-  <a class="button" href="https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808496d4b6670196d4e40901001b" target="_blank">Assinar e Acessar Agora</a>
+    <script>
+        function calcular() {
+            let custo = parseFloat(document.getElementById('custo').value);
+            let acrescimo = parseFloat(document.getElementById('acrescimo').value);
+            let taxa = parseFloat(document.getElementById('taxa').value) / 100;
+            let impostos = parseFloat(document.getElementById('impostos').value) / 100;
+            let lucro = parseFloat(document.getElementById('lucro').value) / 100;
 
-  <footer>
-    Pagamento seguro via Mercado Pago. Teste grátis por 7 dias.<br>
-    Instagram · TikTok
-  </footer>
-</main>
+            let base = custo + acrescimo;
+            let comissao = base * taxa;
+            let tributo = base * impostos;
+            let totalCusto = base + comissao + tributo;
+            let precoFinal = totalCusto / (1 - lucro);
+            let lucroFinal = precoFinal - totalCusto;
 
-<a class="whatsapp" href="https://wa.me/5511967652289" target="_blank">
-  <img src="whats.png" alt="WhatsApp">
-</a>
-
+            document.getElementById('resultado').innerHTML = `
+                <strong>Preço Final de Venda:</strong> R$ ${precoFinal.toFixed(2)}<br>
+                <strong>Lucro por Venda:</strong> R$ ${lucroFinal.toFixed(2)}
+            `;
+        }
+    </script>
 </body>
 </html>
