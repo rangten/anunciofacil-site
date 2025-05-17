@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assistente de IA - AnúncioFácil PRO</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #ffcc00;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      max-width: 700px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: bold;
+    }
+    textarea, input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background-color: #3483FA;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+    .resultado {
+      background-color: #e6f7ff;
+      padding: 15px;
+      border-left: 4px solid #3483FA;
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Assistente de IA</h1>
+  </header>
+
+  <main>
+    <h2>Gere descrição e título para seu anúncio</h2>
+    <label for="produto">Nome do Produto:</label>
+    <input type="text" id="produto" placeholder="Ex: Camiseta básica algodão masculina" />
+
+    <label for="caracteristicas">Características (separadas por vírgula):</label>
+    <textarea id="caracteristicas" rows="4" placeholder="Ex: 100% algodão, não encolhe, várias cores..."></textarea>
+
+    <button onclick="gerarTexto()">Gerar com IA</button>
+
+    <div class="resultado" id="saida">
+      <strong>Título:</strong><br>
+      Camiseta Masculina Algodão Premium Confortável<br><br>
+      <strong>Descrição:</strong><br>
+      Camiseta de algodão de alta qualidade com caimento perfeito, não encolhe e ideal para o dia a dia. Disponível em várias cores. Excelente para compor looks versáteis.
+    </div>
+  </main>
+
+  <script>
+    function gerarTexto() {
+      const resultado = document.getElementById('saida');
+      resultado.style.display = 'block';
+      // No futuro pode usar uma API de IA para resposta real
+    }
+  </script>
+</body>
+</html>

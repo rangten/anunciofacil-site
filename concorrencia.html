@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comparar Concorrência - AnúncioFácil PRO</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #ffcc00;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background-color: #3483FA;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+    .comparacao {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .card {
+      flex: 1;
+      background-color: #f1f1f1;
+      padding: 15px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Comparar Anúncios</h1>
+  </header>
+
+  <main>
+    <h2>Compare dois anúncios lado a lado</h2>
+    <label for="link1">Link do seu anúncio:</label>
+    <input type="text" id="link1" placeholder="https://produto.mercadolivre.com.br/..." />
+    <label for="link2">Link do concorrente:</label>
+    <input type="text" id="link2" placeholder="https://produto.mercadolivre.com.br/..." />
+    <button onclick="comparar()">Comparar</button>
+
+    <div class="comparacao" id="resultado" style="display:none;">
+      <div class="card">
+        <h3>Seu Anúncio</h3>
+        <p><strong>Vendas:</strong> 25/mês</p>
+        <p><strong>Visitas:</strong> 640</p>
+        <p><strong>Título:</strong> Camiseta Algodão Masculina</p>
+      </div>
+      <div class="card">
+        <h3>Concorrente</h3>
+        <p><strong>Vendas:</strong> 40/mês</p>
+        <p><strong>Visitas:</strong> 950</p>
+        <p><strong>Título:</strong> Camiseta Básica Premium</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function comparar() {
+      document.getElementById('resultado').style.display = 'flex';
+    }
+  </script>
+</body>
+</html>

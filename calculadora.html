@@ -2,104 +2,104 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Calculadora de Preços</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            color: #333;
-        }
-        .calculator {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: auto;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        label {
-            display: block;
-            margin-top: 15px;
-        }
-        input, select {
-            padding: 10px;
-            width: 100%;
-            margin-top: 5px;
-        }
-        .result {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #e6ffe6;
-            border: 1px solid #b2ffb2;
-            border-radius: 5px;
-        }
-        button {
-            margin-top: 20px;
-            padding: 10px 15px;
-            background-color: #3483FA;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Lucro - AnúncioFácil PRO</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f0f0f0;
+      color: #333;
+    }
+    header {
+      background-color: #ffcc00;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      max-width: 600px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background-color: #3483FA;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      width: 100%;
+      cursor: pointer;
+    }
+    .resultado {
+      margin-top: 30px;
+      background-color: #eaffea;
+      border-left: 4px solid #4CAF50;
+      padding: 15px;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <div class="calculator">
-        <h1>Calculadora de Preços</h1>
-        <label for="marketplace">Marketplace:</label>
-        <select id="marketplace">
-            <option value="shopee">Shopee</option>
-            <option value="mercado_livre">Mercado Livre</option>
-            <option value="shein">Shein</option>
-        </select>
+  <header>
+    <h1>Calculadora de Lucro</h1>
+  </header>
 
-        <label for="custo">Custo do Produto (R$):</label>
-        <input type="number" id="custo" value="20">
+  <main>
+    <label for="custo">Custo do Produto (R$):</label>
+    <input type="number" id="custo" value="20" />
 
-        <label for="acrescimo">Acréscimo (R$):</label>
-        <input type="number" id="acrescimo" value="5">
+    <label for="acrescimo">Acréscimo (frete, embalagem, etc) (R$):</label>
+    <input type="number" id="acrescimo" value="5" />
 
-        <label for="taxa">Taxa da Plataforma (%):</label>
-        <input type="number" id="taxa" value="16">
+    <label for="taxa">Taxa da Plataforma (%):</label>
+    <input type="number" id="taxa" value="16" />
 
-        <label for="impostos">Impostos (%):</label>
-        <input type="number" id="impostos" value="8">
+    <label for="imposto">Impostos (%):</label>
+    <input type="number" id="imposto" value="8" />
 
-        <label for="lucro">Margem de Lucro (%):</label>
-        <input type="number" id="lucro" value="20">
+    <label for="lucro">Margem de Lucro Desejada (%):</label>
+    <input type="number" id="lucro" value="20" />
 
-        <button onclick="calcular()">Calcular</button>
+    <button onclick="calcular()">Calcular</button>
 
-        <div class="result" id="resultado"></div>
+    <div class="resultado" id="resultado">
+      <strong>Resultado:</strong><br>
+      Preço de venda sugerido: <span id="venda">R$ 0.00</span><br>
+      Lucro estimado: <span id="ganho">R$ 0.00</span>
     </div>
+  </main>
 
-    <script>
-        function calcular() {
-            let custo = parseFloat(document.getElementById('custo').value);
-            let acrescimo = parseFloat(document.getElementById('acrescimo').value);
-            let taxa = parseFloat(document.getElementById('taxa').value) / 100;
-            let impostos = parseFloat(document.getElementById('impostos').value) / 100;
-            let lucro = parseFloat(document.getElementById('lucro').value) / 100;
+  <script>
+    function calcular() {
+      const custo = parseFloat(document.getElementById('custo').value);
+      const acrescimo = parseFloat(document.getElementById('acrescimo').value);
+      const taxa = parseFloat(document.getElementById('taxa').value) / 100;
+      const imposto = parseFloat(document.getElementById('imposto').value) / 100;
+      const lucro = parseFloat(document.getElementById('lucro').value) / 100;
 
-            let base = custo + acrescimo;
-            let comissao = base * taxa;
-            let tributo = base * impostos;
-            let totalCusto = base + comissao + tributo;
-            let precoFinal = totalCusto / (1 - lucro);
-            let lucroFinal = precoFinal - totalCusto;
+      const base = custo + acrescimo;
+      const precoVenda = base / (1 - taxa - imposto - lucro);
+      const ganho = precoVenda - base;
 
-            document.getElementById('resultado').innerHTML = `
-                <strong>Preço Final de Venda:</strong> R$ ${precoFinal.toFixed(2)}<br>
-                <strong>Lucro por Venda:</strong> R$ ${lucroFinal.toFixed(2)}
-            `;
-        }
-    </script>
+      document.getElementById('venda').innerText = `R$ ${precoVenda.toFixed(2)}`;
+      document.getElementById('ganho').innerText = `R$ ${ganho.toFixed(2)}`;
+      document.getElementById('resultado').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
