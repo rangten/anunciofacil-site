@@ -5,153 +5,127 @@
     <meta charset="UTF-8">
     <title>AnúncioFácil IA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Seu assistente de IA para criação de anúncios no Mercado Livre e Shopee.">
     <style>
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
-            background-color: #fff8f0;
-            color: #1a1a1a;
+            background-color: #fff8ee;
         }
         header {
-            background-color: #ffcc00;
-            padding: 20px 0;
+            background-color: #ffbe00;
+            padding: 20px;
             text-align: center;
         }
         header h1 {
             margin: 0;
-            font-size: 2.5em;
-            color: #1a1a1a;
+            font-size: 32px;
         }
         header p {
-            margin-top: 10px;
-            font-size: 1.2em;
-        }
-        main {
-            padding: 30px 20px;
-            text-align: center;
+            margin-top: 5px;
+            font-size: 18px;
         }
         section {
-            max-width: 900px;
-            margin: auto;
-            margin-bottom: 40px;
-            text-align: left;
-        }
-        section h2 {
-            color: #1a1a1a;
+            padding: 40px;
+            text-align: center;
         }
         ul {
             list-style: none;
-            padding: 0;
+            padding-left: 0;
+            text-align: left;
+            max-width: 700px;
+            margin: auto;
         }
-        li::before {
+        ul li::before {
             content: '✔️';
-            margin-right: 8px;
-            color: #6a0dad;
+            margin-right: 10px;
+            color: purple;
         }
-        .benefits {
-            margin-bottom: 30px;
-        }
-        .images-section {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin-bottom: 30px;
-        }
-        .images-section div {
-            text-align: center;
-        }
-        .images-section img {
-            max-width: 220px;
-            border-radius: 10px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.1);
-        }
-        .cta-button {
-            display: block;
-            margin: 30px auto;
+        .btn {
             background-color: #3483FA;
             color: white;
-            padding: 14px 32px;
+            padding: 14px 24px;
             border: none;
-            border-radius: 6px;
-            font-size: 18px;
-            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
             text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
         }
-        .cta-button:hover {
-            background-color: #2a68c8;
+        .antes-depois {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 30px;
+        }
+        .antes-depois div {
+            text-align: center;
+        }
+        .flutuante {
+            position: fixed;
+            right: 10px;
+            bottom: 10px;
         }
         footer {
             text-align: center;
             padding: 20px;
             font-size: 14px;
-            color: #666;
-        }
-        .whatsapp-button {
-            position: fixed;
-            bottom: 18px;
-            right: 18px;
-            z-index: 999;
-        }
-        .whatsapp-button img {
-            width: 48px;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>AnúncioFácil IA</h1>
+        <h1>AnúncioFácil IA 🚀</h1>
         <p>Seu assistente de IA para criação de anúncios no Mercado Livre e Shopee.</p>
     </header>
-    <main>
-        <section>
-            <p>Você é vendedor do Mercado Livre ou Shopee e perde tempo criando anúncios? O <strong>AnúncioFácil IA</strong> é a solução que você precisa!</p>
-            <p>Nosso assistente de inteligência artificial cria <strong>descrições profissionais com SEO</strong> e <strong>imagens realistas</strong> automaticamente. Basta preencher as informações do produto e você recebe o conteúdo pronto para <strong>copiar e colar</strong> no seu anúncio.</p>
-        </section>
 
-        <section>
-            <h2>Problemas que resolvemos:</h2>
-            <ul>
-                <li>Perda de tempo criando descrições</li>
-                <li>Imagens amadoras que afastam clientes</li>
-                <li>Dificuldade em destacar seus produtos</li>
-            </ul>
-        </section>
+    <section>
+        <p>Você é vendedor do Mercado Livre ou Shopee e perde tempo criando anúncios? O <strong>AnúncioFácil IA</strong> é a solução que você precisa!</p>
+        <p>Nosso assistente de inteligência artificial cria <strong>descrições profissionais com SEO e imagens realistas</strong> automaticamente.</p>
+        <p>Basta preencher as informações do produto e você recebe o conteúdo pronto para <strong>copiar e colar</strong> no seu anúncio.</p>
 
-        <section class="benefits">
-            <h2>Benefícios do Assistente de IA:</h2>
-            <ul>
-                <li>Cria descrições com SEO</li>
-                <li>Gera imagens realistas com IA</li>
-                <li>Entrega 5 títulos otimizados com palavras-chave</li>
-                <li>Conteúdo pronto para copiar e colar</li>
-            </ul>
-        </section>
+        <h2>Problemas que resolvemos:</h2>
+        <ul>
+            <li>Perda de tempo criando descrições</li>
+            <li>Imagens amadoras que afastam clientes</li>
+            <li>Dificuldade em destacar seus produtos</li>
+        </ul>
 
-        <section>
-            <h2>Antes e Depois:</h2>
-            <div class="images-section">
-                <div>
-                    <strong>ANTES</strong><br>
-                    <img src="antes.png" alt="Antes da IA">
-                </div>
-                <div>
-                    <strong>DEPOIS</strong><br>
-                    <img src="depois.png" alt="Depois da IA">
-                </div>
+        <h2>Benefícios do Assistente de IA:</h2>
+        <ul>
+            <li>Cria descrições com SEO</li>
+            <li>Gera imagens realistas com IA</li>
+            <li>Entrega 5 títulos otimizados com palavras-chave</li>
+            <li>Conteúdo pronto para copiar e colar</li>
+        </ul>
+
+        <h2>Antes e Depois:</h2>
+        <div class="antes-depois">
+            <div>
+                <p><strong>ANTES</strong></p>
+                <img src="antes_e_depois.png" alt="Antes da IA" width="180">
             </div>
-        </section>
+            <div>
+                <p><strong>DEPOIS</strong></p>
+                <img src="antes_e_depois.png" alt="Depois da IA" width="180" style="object-position: right;">
+            </div>
+        </div>
 
-        <a href="https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808496d4b6670196d4e40901001b" target="_blank" class="cta-button">Assinar e Acessar Agora</a>
-    </main>
+        <a class="btn" href="https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808496d4b6670196d4e40901001b" target="_blank">
+            Assinar e Acessar Agora
+        </a>
+        <br><br>
+        <a class="btn" href="calculadora.html" target="_blank">Acessar Calculadora de Preços</a>
+    </section>
 
     <footer>
         Pagamento seguro via Mercado Pago. Teste grátis por 7 dias.<br>
         Instagram • TikTok
     </footer>
 
-    <a class="whatsapp-button" href="https://wa.me/5511967652289" target="_blank">
-        <img src="whatsapp.png" alt="WhatsApp">
-    </a>
+    <div class="flutuante">
+        <a href="https://wa.me/5511967652289" target="_blank">
+            <img src="whatsapp-logo.png" alt="WhatsApp" width="40">
+        </a>
+    </div>
 </body>
 </html>
