@@ -1,84 +1,878 @@
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AnúncioFácil PRO</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background-color: #f8f8f8;
-      color: #333;
-    }
-    header {
-      background-color: #ffc400;
-      padding: 30px 20px;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
-    header p {
-      margin-top: 10px;
-      font-size: 1.2em;
-    }
-    main {
-      padding: 40px 20px;
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
-    }
-    .btn-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-    a.btn {
-      display: block;
-      padding: 16px;
-      background-color: #3483FA;
-      color: white;
-      text-decoration: none;
-      font-size: 1.1em;
-      border-radius: 8px;
-      transition: background 0.3s;
-    }
-    a.btn:hover {
-      background-color: #1f5fd6;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #eee;
-      font-size: 0.9em;
-      margin-top: 40px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnúncioFácil - Crie anúncios profissionais com IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(90deg, #4F46E5 0%, #7C3AED 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #4F46E5 0%, #7C3AED 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .blue-button {
+            background-color: #3483FA;
+            color: white;
+            padding: 10px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            cursor: pointer;
+        }
+        .blue-button:hover {
+            background-color: #2a68c8;
+        }
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+        }
+        .free-trial-button {
+            background-color: #10B981;
+            color: white;
+            padding: 10px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .free-trial-button:hover {
+            background-color: #059669;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-answer.active {
+            max-height: 200px;
+        }
+        .step-card {
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .mercadolivre-button {
+            background-color: #FFE600;
+            color: #333333;
+            padding: 10px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .mercadolivre-button:hover {
+            background-color: #E6CF00;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 230, 0, 0.4);
+        }
+        .shopee-button {
+            background-color: #EE4D2D;
+            color: white;
+            padding: 10px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .shopee-button:hover {
+            background-color: #D23F20;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(238, 77, 45, 0.4);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.2s;
+        }
+        .close-modal:hover {
+            color: #333;
+        }
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .input-field:focus {
+            border-color: #4F46E5;
+            outline: none;
+        }
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4F46E5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        .login-button:hover {
+            background-color: #3c35b5;
+        }
+        .forgot-password {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #4F46E5;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        .register-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        .register-link a {
+            color: #4F46E5;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        .or-divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .or-divider::before,
+        .or-divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+        .or-divider span {
+            padding: 0 10px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
 </head>
-<body>
-
-  <header>
-    <h1>AnúncioFácil PRO</h1>
-    <p>Simplifique a criação e gestão dos seus anúncios no Mercado Livre e Shopee</p>
-  </header>
-
-  <main>
-    <h2>Acesse as ferramentas:</h2>
-    <div class="btn-grid">
-      <a href="vendas.html" class="btn">📊 Análise de Vendas</a>
-      <a href="concorrencia.html" class="btn">🔍 Comparar Concorrência</a>
-      <a href="assistente.html" class="btn">🤖 Assistente de IA</a>
-      <a href="calculadora.html" class="btn">🧮 Calculadora de Lucro</a>
+<body class="bg-gray-50">
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2 class="text-2xl font-bold mb-6 text-center">Acesse sua conta</h2>
+            <form id="loginForm">
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 mb-2">Email</label>
+                    <input type="email" id="email" class="input-field" placeholder="Seu email" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-gray-700 mb-2">Senha</label>
+                    <input type="password" id="password" class="input-field" placeholder="Sua senha" required>
+                </div>
+                <button type="submit" class="login-button">Entrar</button>
+                <a href="#" class="forgot-password">Esqueceu sua senha?</a>
+            </form>
+            <div class="or-divider">
+                <span>ou</span>
+            </div>
+            <button id="freeTrialBtn" class="free-trial-button w-full">Experimente Grátis</button>
+            <p class="register-link">Não tem uma conta? <a href="#" id="showRegisterModal">Cadastre-se</a></p>
+        </div>
     </div>
-  </main>
 
-  <footer>
-    &copy; 2024 AnúncioFácil PRO. Desenvolvido para vendedores de sucesso.
-  </footer>
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeRegisterModal">&times;</span>
+            <h2 class="text-2xl font-bold mb-6 text-center">Crie sua conta</h2>
+            <form id="registerForm">
+                <div class="mb-4">
+                    <label for="registerName" class="block text-gray-700 mb-2">Nome completo</label>
+                    <input type="text" id="registerName" class="input-field" placeholder="Seu nome completo" required>
+                </div>
+                <div class="mb-4">
+                    <label for="registerEmail" class="block text-gray-700 mb-2">Email</label>
+                    <input type="email" id="registerEmail" class="input-field" placeholder="Seu email" required>
+                </div>
+                <div class="mb-4">
+                    <label for="registerPassword" class="block text-gray-700 mb-2">Senha</label>
+                    <input type="password" id="registerPassword" class="input-field" placeholder="Crie uma senha" required>
+                </div>
+                <div class="mb-4">
+                    <label for="confirmPassword" class="block text-gray-700 mb-2">Confirme sua senha</label>
+                    <input type="password" id="confirmPassword" class="input-field" placeholder="Confirme sua senha" required>
+                </div>
+                <button type="submit" class="login-button">Cadastrar</button>
+            </form>
+            <p class="register-link">Já tem uma conta? <a href="#" id="showLoginModal">Faça login</a></p>
+        </div>
+    </div>
 
-</body>
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/5511967652289" target="_blank" class="whatsapp-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+    </a>
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm fixed w-full z-10">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="text-2xl font-bold gradient-text">AnúncioFácil</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#como-usar" class="text-gray-600 hover:text-indigo-600 font-medium">Como Usar</a>
+                <a href="#recursos" class="text-gray-600 hover:text-indigo-600 font-medium">Recursos</a>
+                <a href="#planos" class="text-gray-600 hover:text-indigo-600 font-medium">Planos</a>
+                <a href="#faq" class="text-gray-600 hover:text-indigo-600 font-medium">FAQ</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-4">
+                <button id="navLoginBtn" class="text-indigo-600 font-medium hover:text-indigo-800">Entrar</button>
+                <a href="#planos" class="bg-indigo-600 text-white px-6 py-2 rounded-full font-medium">Ver Planos</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-500 hover:text-indigo-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md absolute w-full left-0 top-full">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+                <a href="#como-usar" class="text-gray-600 hover:text-indigo-600 font-medium">Como Usar</a>
+                <a href="#recursos" class="text-gray-600 hover:text-indigo-600 font-medium">Recursos</a>
+                <a href="#planos" class="text-gray-600 hover:text-indigo-600 font-medium">Planos</a>
+                <a href="#faq" class="text-gray-600 hover:text-indigo-600 font-medium">FAQ</a>
+                <button id="mobileLoginBtn" class="text-indigo-600 font-medium hover:text-indigo-800 text-left">Entrar</button>
+                <a href="#planos" class="bg-indigo-600 text-white px-6 py-2 rounded-full font-medium text-center">Ver Planos</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-28 pb-20 px-4 gradient-bg text-white">
+        <div class="container mx-auto">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Bem-vindo ao AnúncioFácil</h1>
+                <p class="text-xl mb-8">Crie anúncios profissionais para Mercado Livre e Shopee em minutos com o poder da Inteligência Artificial.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button id="heroLoginBtn" class="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full font-medium text-center transition-all flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        Experimente Grátis
+                    </button>
+                    <a href="#como-usar" class="bg-white text-indigo-700 px-8 py-3 rounded-full font-medium text-center">Começar Agora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Usar Section -->
+    <section id="como-usar" class="py-20 px-4 bg-white">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <span class="bg-indigo-100 text-indigo-800 text-sm font-medium px-4 py-1 rounded-full">Tutorial</span>
+                <h2 class="text-3xl font-bold mt-4 mb-4">Como Usar o AnúncioFácil</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Crie anúncios profissionais em apenas 3 passos simples</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Passo 1 -->
+                <div class="bg-white rounded-xl shadow-md p-6 step-card border-t-4 border-indigo-500">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <span class="text-indigo-600 font-bold text-xl">1</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Forneça Informações Básicas</h3>
+                    <p class="text-gray-600 text-center">Insira apenas algumas informações básicas sobre o seu produto, como nome, características principais e diferenciais.</p>
+                </div>
+                
+                <!-- Passo 2 -->
+                <div class="bg-white rounded-xl shadow-md p-6 step-card border-t-4 border-indigo-500">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <span class="text-indigo-600 font-bold text-xl">2</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Nossa IA Trabalha</h3>
+                    <p class="text-gray-600 text-center">Com apenas essas informações, nossa IA gera descrições persuasivas e otimizadas para SEO que destacam os benefícios do seu produto.</p>
+                </div>
+                
+                <!-- Passo 3 -->
+                <div class="bg-white rounded-xl shadow-md p-6 step-card border-t-4 border-indigo-500">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <span class="text-indigo-600 font-bold text-xl">3</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Receba Seu Anúncio</h3>
+                    <p class="text-gray-600 text-center">Receba um anúncio profissional pronto para publicar, com descrições otimizadas e imagens aprimoradas para marketplaces.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 max-w-4xl mx-auto">
+                <div class="bg-gray-50 rounded-xl p-8 border border-gray-200">
+                    <h3 class="text-2xl font-bold mb-6 text-center">Recursos Principais</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Anúncios e Imagens -->
+                        <div class="flex items-start">
+                            <div class="bg-indigo-100 rounded-full p-3 mr-4 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-2">Anúncios e Imagens Otimizados</h4>
+                                <p class="text-gray-600">Nossa IA gera anúncios e imagens de acordo com as regras específicas do Mercado Livre e Shopee, garantindo maior visibilidade e conversão para seus produtos em ambas as plataformas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <button id="tryNowBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-medium inline-flex items-center transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Experimente Agora Mesmo
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Principais Ferramentas -->
+    <section id="recursos" class="py-12 px-4 bg-gray-50">
+        <div class="container mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-4">Nossas Principais Ferramentas</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Crie anúncios profissionais em minutos com nossas ferramentas de IA</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Anúncio Shopee -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-orange-500">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold">Anúncio Shopee</h3>
+                    </div>
+                    
+                    <p class="text-gray-600 mb-6">Crie anúncios otimizados para a Shopee com descrições persuasivas e seguindo todas as regras da plataforma para maximizar suas vendas.</p>
+                    
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Textos otimizados para SEO</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Destaque de benefícios do produto</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="https://chatgpt.com/g/g-681234c843148191a5e897913f6fbac0-6-imagens-ml" target="_blank" class="shopee-button w-full block text-center">
+                        CRIAR ANÚNCIO SHOPEE
+                    </a>
+                </div>
+                
+                <!-- Anúncio Mercado Livre -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-yellow-500">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 bg-yellow-100 rounded-full flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold">Anúncio Mercado Livre</h3>
+                    </div>
+                    
+                    <p class="text-gray-600 mb-6">Crie anúncios otimizados para o Mercado Livre com descrições e imagens que seguem todas as regras da plataforma para aumentar suas vendas.</p>
+                    
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Anúncios otimizados para o Mercado Livre</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Imagens otimizadas para maior conversão</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="https://chatgpt.com/g/g-681234c843148191a5e897913f6fbac0-6-imagens-ml" target="_blank" class="mercadolivre-button w-full block text-center">
+                        CRIAR ANÚNCIO MERCADO LIVRE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos e Preços -->
+    <section id="planos" class="py-20 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <span class="bg-indigo-100 text-indigo-800 text-sm font-medium px-4 py-1 rounded-full">Planos</span>
+                <h2 class="text-3xl font-bold mt-4 mb-4">Escolha o plano ideal para você</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Oferecemos opções flexíveis para atender às necessidades de todos os tipos de vendedores</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                <!-- Plano Gratuito -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border-2 border-green-500">
+                    <div class="bg-green-500 text-white text-center py-2">
+                        <span class="font-medium">Experimente</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Plano Gratuito</h3>
+                        <div class="flex items-end mb-4">
+                            <span class="text-3xl font-bold">R$0</span>
+                            <span class="text-gray-500 ml-1">/sempre</span>
+                        </div>
+                        <p class="text-gray-600 mb-6">Experimente as funcionalidades básicas sem compromisso.</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>2 anúncios por mês</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Gerador de descrições básico</span>
+                            </li>
+                        </ul>
+                        <a href="https://chatgpt.com/g/g-681234c843148191a5e897913f6fbac0-6-imagens-ml" target="_blank" class="free-trial-button w-full block text-center">Começar Grátis</a>
+                    </div>
+                </div>
+                
+                <!-- Plano Básico -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border-2 border-blue-500">
+                    <div class="bg-blue-500 text-white text-center py-2">
+                        <span class="font-medium">Básico</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Plano Básico</h3>
+                        <div class="flex items-end mb-4">
+                            <span class="text-3xl font-bold">R$49</span>
+                            <span class="text-gray-500 ml-1">/mês</span>
+                        </div>
+                        <p class="text-gray-600 mb-6">Ideal para vendedores iniciantes que estão começando no e-commerce.</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>10 anúncios por mês</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Gerador de descrições</span>
+                            </li>
+                        </ul>
+                        <a href="https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808496d9dcdf0196e8add2280635" target="_blank" class="blue-button w-full block text-center">Assinar Agora</a>
+                    </div>
+                </div>
+                
+                <!-- Plano Profissional -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-indigo-500">
+                    <div class="bg-indigo-500 text-white text-center py-2">
+                        <span class="font-medium">Mais Popular</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Plano Profissional</h3>
+                        <div class="flex items-end mb-4">
+                            <span class="text-3xl font-bold">R$89</span>
+                            <span class="text-gray-500 ml-1">/mês</span>
+                        </div>
+                        <p class="text-gray-600 mb-6">Perfeito para vendedores regulares que desejam expandir seus negócios.</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>30 anúncios por mês</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Gerador de descrições avançado</span>
+                            </li>
+                        </ul>
+                        <a href="https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808496d77cae0196e8af8d7f06d9" target="_blank" class="blue-button w-full block text-center">Assinar Agora</a>
+                    </div>
+                </div>
+                
+                <!-- Plano Empresarial -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border-2 border-purple-500">
+                    <div class="bg-purple-500 text-white text-center py-2">
+                        <span class="font-medium">Empresarial</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Plano Empresarial</h3>
+                        <div class="flex items-end mb-4">
+                            <span class="text-3xl font-bold">R$149</span>
+                            <span class="text-gray-500 ml-1">/mês</span>
+                        </div>
+                        <p class="text-gray-600 mb-6">Para empresas com grande volume de anúncios e necessidades avançadas.</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Anúncios ilimitados</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Suporte prioritário</span>
+                            </li>
+                        </ul>
+                        <a href="https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808496d9dcdf0196e8b0c0280637" target="_blank" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium w-full block text-center hover:bg-purple-700 transition-colors">Assinar Agora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20 px-4 bg-gray-50">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <span class="bg-indigo-100 text-indigo-800 text-sm font-medium px-4 py-1 rounded-full">Dúvidas</span>
+                <h2 class="text-3xl font-bold mt-4 mb-4">Perguntas Frequentes</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Encontre respostas para as dúvidas mais comuns sobre o AnúncioFácil</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-4">
+                    <button class="faq-question w-full text-left p-6 focus:outline-none">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold">Como funciona o pagamento?</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6 pb-6">
+                        <p class="text-gray-600">O pagamento é feito através do Mercado Pago, uma plataforma segura e confiável. Você pode pagar com cartão de crédito, boleto bancário ou PIX. A assinatura é renovada automaticamente a cada mês, mas você pode cancelar a qualquer momento.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-4">
+                    <button class="faq-question w-full text-left p-6 focus:outline-none">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold">Posso cancelar minha assinatura?</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6 pb-6">
+                        <p class="text-gray-600">Sim, você pode cancelar sua assinatura a qualquer momento. Basta acessar sua conta no Mercado Pago e cancelar a assinatura. Você continuará tendo acesso às ferramentas até o final do período pago.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-4">
+                    <button class="faq-question w-full text-left p-6 focus:outline-none">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold">Como acesso minha conta?</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6 pb-6">
+                        <p class="text-gray-600">Após realizar sua assinatura, você receberá um email com instruções para acessar sua conta. Você pode fazer login a qualquer momento clicando no botão "Entrar" no topo da página. Se tiver problemas para acessar sua conta, entre em contato com nosso suporte.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-indigo-900 text-white py-12 px-4">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">AnúncioFácil</h3>
+                    <p class="text-indigo-200 mb-4">Crie anúncios profissionais para marketplaces com o poder da Inteligência Artificial.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Links Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#como-usar" class="text-indigo-200 hover:text-white">Como Usar</a></li>
+                        <li><a href="#recursos" class="text-indigo-200 hover:text-white">Recursos</a></li>
+                        <li><a href="#planos" class="text-indigo-200 hover:text-white">Planos</a></li>
+                        <li><a href="#faq" class="text-indigo-200 hover:text-white">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contato</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 mt-0.5 text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <span class="text-indigo-200">contato@anunciofacil.com.br</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 mt-0.5 text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            <span class="text-indigo-200">(11) 96765-2289</span>
+                        </li>
+                        <li class="mt-4">
+                            <a href="https://wa.me/5511967652289" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-md flex items-center justify-center w-full md:w-auto hover:bg-green-700 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                                </svg>
+                                Fale Conosco
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-indigo-800 text-center text-indigo-300">
+                <p>&copy; 2023 AnúncioFácil. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menu móvel
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // FAQ
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('svg');
+                    
+                    answer.classList.toggle('active');
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+            
+            // Modais
+            const loginModal = document.getElementById('loginModal');
+            const registerModal = document.getElementById('registerModal');
+            const closeModal = document.getElementById('closeModal');
+            const closeRegisterModal = document.getElementById('closeRegisterModal');
+            const showRegisterModal = document.getElementById('showRegisterModal');
+            const showLoginModal = document.getElementById('showLoginModal');
+            
+            // Botões que abrem o modal de login
+            const loginButtons = [
+                document.getElementById('navLoginBtn'),
+                document.getElementById('mobileLoginBtn'),
+                document.getElementById('heroLoginBtn'),
+                document.getElementById('tryNowBtn')
+            ];
+            
+            // Função para abrir o modal de login
+            function openLoginModal() {
+                if (loginModal) {
+                    loginModal.style.display = 'flex';
+                    if (registerModal) registerModal.style.display = 'none';
+                }
+            }
+            
+            // Adicionar evento de clique a todos os botões de login
+            loginButtons.forEach(button => {
+                if (button) {
+                    button.addEventListener('click', openLoginModal);
+                }
+            });
+            
+            // Fechar modais
+            if (closeModal) {
+                closeModal.addEventListener('click', function() {
+                    loginModal.style.display = 'none';
+                });
+            }
+            
+            if (closeRegisterModal) {
+                closeRegisterModal.addEventListener('click', function() {
+                    registerModal.style.display = 'none';
+                });
+            }
+            
+            // Alternar entre modais
+            if (showRegisterModal) {
+                showRegisterModal.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (loginModal) loginModal.style.display = 'none';
+                    if (registerModal) registerModal.style.display = 'flex';
+                });
+            }
+            
+            if (showLoginModal) {
+                showLoginModal.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (registerModal) registerModal.style.display = 'none';
+                    if (loginModal) loginModal.style.display = 'flex';
+                });
+            }
+            
+            // Fechar modais ao clicar fora deles
+            window.addEventListener('click', function(e) {
+                if (loginModal && e.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+                if (registerModal && e.target === registerModal) {
+                    registerModal.style.display = 'none';
+                }
+            });
+            
+            // Botão de teste gratuito dentro do modal
+            const freeTrialBtn = document.getElementById('freeTrialBtn');
+            if (freeTrialBtn) {
+                freeTrialBtn.addEventListener('click', function() {
+                    if (loginModal) loginModal.style.display = 'none';
+                    window.open('https://chatgpt.com/g/g-681234c843148191a5e897913f6fbac0-6-imagens-ml', '_blank');
+                });
+            }
+            
+            // Formulário de login
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    if (loginModal) loginModal.style.display = 'none';
+                    window.open('https://chatgpt.com/g/g-681234c843148191a5e897913f6fbac0-6-imagens-ml', '_blank');
+                });
+            }
+            
+            // Formulário de registro
+            const registerForm = document.getElementById('registerForm');
+            if (registerForm) {
+                registerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    if (registerModal) registerModal.style.display = 'none';
+                    window.open('https://chatgpt.com/g/g-681234c843148191a5e897913f6fbac0-6-imagens-ml', '_blank');
+                });
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'942c9a4b86dbae9f',t:'MTc0Nzc1MjE2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
