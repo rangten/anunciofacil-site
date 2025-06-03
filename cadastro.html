@@ -23,7 +23,41 @@
     firebase.initializeApp(firebaseConfig);
   </script>
 
-  <script defer src="cadastro.js"></script>
+  <!-- Script de cadastro embutido -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('formCadastro').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const nome = document.getElementById('nome').value;
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
+
+        try {
+          const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, senha);
+          const user = userCredential.user;
+
+          await user.updateProfile({ displayName: nome });
+
+          const db = firebase.firestore();
+          const dataExpira = new Date();
+          dataExpira.setDate(dataExpira.getDate() + 7); // 7 dias grátis
+
+          await db.collection('usuarios').doc(user.uid).set({
+            nome: nome,
+            email: email,
+            plano: 'Grátis',
+            planoExpira: dataExpira.toISOString()
+          });
+
+          window.location.href = 'painel.html';
+        } catch (error) {
+          alert('Erro ao cadastrar: ' + error.message);
+        }
+      });
+    });
+  </script>
+
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
