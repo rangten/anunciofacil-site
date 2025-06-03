@@ -4,10 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cadastro – Anúncio Fácil IA</title>
-  <script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-  <script defer src="firebase-init.js"></script>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+  <!-- Firebase Config direto embutido -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDhTzKa989sc46gFx1QD8Tm-siN6aZzFQ",
+      authDomain: "anuncio-facil-9bc0a.firebaseapp.com",
+      projectId: "anuncio-facil-9bc0a",
+      storageBucket: "anuncio-facil-9bc0a.appspot.com",
+      messagingSenderId: "770989094257",
+      appId: "1:770989094257:web:07666e8c7558219e4f1880"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
   <script defer src="cadastro.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
