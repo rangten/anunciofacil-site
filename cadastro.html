@@ -2,63 +2,9 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadastro – Anúncio Fácil IA</title>
-
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-
-  <!-- Firebase Config atualizado -->
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyDhTzKa989sc46gFx1QD8Tm-siN6aZzFQ",
-      authDomain: "anuncio-facil-9bc0a.firebaseapp.com",
-      projectId: "anuncio-facil-9bc0a",
-      storageBucket: "anuncio-facil-9bc0a.appspot.com",
-      messagingSenderId: "770989094257",
-      appId: "1:770989094257:web:07666e8c7558219e4f1880"
-    };
-    firebase.initializeApp(firebaseConfig);
-  </script>
-
-  <!-- Script de cadastro -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('formCadastro').addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const nome = document.getElementById('nome').value;
-        const email = document.getElementById('email').value;
-        const senha = document.getElementById('senha').value;
-
-        try {
-          const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, senha);
-          const user = userCredential.user;
-
-          await user.updateProfile({ displayName: nome });
-
-          const db = firebase.firestore();
-          const dataExpira = new Date();
-          dataExpira.setDate(dataExpira.getDate() + 7); // 7 dias grátis
-
-          await db.collection('usuarios').doc(user.uid).set({
-            nome: nome,
-            email: email,
-            plano: 'Grátis',
-            planoExpira: dataExpira.toISOString()
-          });
-
-          window.location.href = 'painel.html';
-        } catch (error) {
-          alert('Erro ao cadastrar: ' + error.message);
-        }
-      });
-    });
-  </script>
-
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
   <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
@@ -71,5 +17,54 @@
     </form>
     <p class="text-sm text-center mt-4">Já tem conta? <a href="login.html" class="text-blue-600">Entrar</a></p>
   </div>
+
+  <!-- Firebase SDK Modular -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDht2RKa989sc46gFX1QD8Tm-siN6aZzFQ",
+      authDomain: "anuncio-facil-9bc0a.firebaseapp.com",
+      projectId: "anuncio-facil-9bc0a",
+      storageBucket: "anuncio-facil-9bc0a.appspot.com",
+      messagingSenderId: "770989904257",
+      appId: "1:770989904257:web:07666e8c7558219e4f1880"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("formCadastro").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const nome = document.getElementById("nome").value;
+        const email = document.getElementById("email").value;
+        const senha = document.getElementById("senha").value;
+
+        try {
+          const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+          const user = userCredential.user;
+          await updateProfile(user, { displayName: nome });
+
+          const dataExpira = new Date();
+          dataExpira.setDate(dataExpira.getDate() + 7); // 7 dias grátis
+
+          await setDoc(doc(db, "usuarios", user.uid), {
+            nome,
+            email,
+            plano: "Grátis",
+            planoExpira: dataExpira.toISOString()
+          });
+
+          window.location.href = "painel.html";
+        } catch (error) {
+          alert("Erro ao cadastrar: " + error.message);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
