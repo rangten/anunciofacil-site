@@ -1,70 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cadastro – Anúncio Fácil IA</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-</head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-  <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
-    <h1 class="text-2xl font-bold mb-4 text-center">Crie sua conta grátis</h1>
-    <form id="formCadastro" class="space-y-4">
-      <input type="text" id="nome" placeholder="Seu nome" required class="w-full border px-3 py-2 rounded" />
-      <input type="email" id="email" placeholder="Seu e-mail" required class="w-full border px-3 py-2 rounded" />
-      <input type="password" id="senha" placeholder="Crie uma senha" required class="w-full border px-3 py-2 rounded" />
-      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Cadastrar</button>
-    </form>
-    <p class="text-sm text-center mt-4">Já tem conta? <a href="login.html" class="text-blue-600">Entrar</a></p>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro – Anúncio Fácil IA</title>
 
-  <!-- Firebase SDK Modular -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyDht2RKa989sc46gFX1QD8Tm-siN6aZzFQ",
-      authDomain: "anuncio-facil-9bc0a.firebaseapp.com",
-      projectId: "anuncio-facil-9bc0a",
-      storageBucket: "anuncio-facil-9bc0a.appspot.com",
-      messagingSenderId: "770989904257",
-      appId: "1:770989904257:web:07666e8c7558219e4f1880"
-    };
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyDht2RKa989sc46gFx1QD8Tm-siN6aZzFQ",
+        authDomain: "anuncio-facil-9bc0a.firebaseapp.com",
+        projectId: "anuncio-facil-9bc0a",
+        storageBucket: "anuncio-facil-9bc0a.appspot.com",
+        messagingSenderId: "770989904257",
+        appId: "1:770989904257:web:07666e8c7558219e4f1880"
+      };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
+      firebase.initializeApp(firebaseConfig);
+    </script>
 
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("formCadastro").addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const nome = document.getElementById("nome").value;
-        const email = document.getElementById("email").value;
-        const senha = document.getElementById("senha").value;
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("formCadastro").addEventListener("submit", async (e) => {
+          e.preventDefault();
 
-        try {
-          const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
-          const user = userCredential.user;
-          await updateProfile(user, { displayName: nome });
+          const nome = document.getElementById("nome").value;
+          const email = document.getElementById("email").value;
+          const senha = document.getElementById("senha").value;
 
-          const dataExpira = new Date();
-          dataExpira.setDate(dataExpira.getDate() + 7); // 7 dias grátis
+          try {
+            const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, senha);
+            const user = userCredential.user;
 
-          await setDoc(doc(db, "usuarios", user.uid), {
-            nome,
-            email,
-            plano: "Grátis",
-            planoExpira: dataExpira.toISOString()
-          });
+            await user.updateProfile({ displayName: nome });
+            await user.sendEmailVerification();
 
-          window.location.href = "painel.html";
-        } catch (error) {
-          alert("Erro ao cadastrar: " + error.message);
-        }
+            const db = firebase.firestore();
+            const dataExpira = new Date();
+            dataExpira.setDate(dataExpira.getDate() + 7); // 7 dias grátis
+
+            await db.collection("usuarios").doc(user.uid).set({
+              nome: nome,
+              email: email,
+              plano: "Grátis",
+              planoExpira: dataExpira.toISOString(),
+              verificado: false
+            });
+
+            alert("Cadastro realizado! Verifique seu e-mail para ativar a conta.");
+            window.location.href = "login.html";
+          } catch (error) {
+            alert("Erro ao cadastrar: " + error.message);
+          }
+        });
       });
-    });
-  </script>
-</body>
+    </script>
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+      <h1 class="text-2xl font-bold mb-4 text-center">Crie sua conta grátis</h1>
+      <form id="formCadastro" class="space-y-4">
+        <input type="text" id="nome" placeholder="Seu nome" required class="w-full border px-3 py-2 rounded" />
+        <input type="email" id="email" placeholder="Seu e-mail" required class="w-full border px-3 py-2 rounded" />
+        <input type="password" id="senha" placeholder="Crie uma senha" required class="w-full border px-3 py-2 rounded" />
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Cadastrar</button>
+      </form>
+      <p class="text-sm text-center mt-4">Já tem conta? <a href="login.html" class="text-blue-600">Entrar</a></p>
+    </div>
+  </body>
 </html>
