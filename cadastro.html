@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro - Anúncio Fácil IA</title>
   <script type="module">
-    // Importação do Firebase Modular SDK
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      updateProfile
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      setDoc
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDht2RKa989sc46gFx1QD8Tm-siN6aZzFQ",
@@ -23,35 +30,51 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    window.cadastrarUsuario = async function () {
-      const email = document.getElementById("email").value;
-      const senha = document.getElementById("senha").value;
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("formCadastro").addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-      try {
-        const credenciais = await createUserWithEmailAndPassword(auth, email, senha);
-        const uid = credenciais.user.uid;
+        const nome = document.getElementById("nome").value;
+        const email = document.getElementById("email").value;
+        const senha = document.getElementById("senha").value;
 
-        await setDoc(doc(db, "usuarios", uid), {
-          email: email,
-          plano: "gratuito",
-          criadoEm: new Date()
-        });
+        try {
+          const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+          await updateProfile(userCredential.user, { displayName: nome });
 
-        window.location.href = "painel.html";
-      } catch (erro) {
-        if (erro.code === 'auth/email-already-in-use') {
-          alert("Este e-mail já está em uso. Faça login ou use outro e-mail.");
-        } else {
-          alert("Erro ao cadastrar: " + erro.message);
+          const dataExpira = new Date();
+          dataExpira.setDate(dataExpira.getDate() + 7); // 7 dias grátis
+
+          await setDoc(doc(db, "usuarios", userCredential.user.uid), {
+            nome,
+            email,
+            plano: "Grátis",
+            planoExpira: dataExpira.toISOString()
+          });
+
+          window.location.href = "painel.html";
+        } catch (error) {
+          if (error.code === "auth/email-already-in-use") {
+            alert("Este e-mail já está em uso. Faça login ou use outro e-mail.");
+          } else {
+            alert("Erro ao cadastrar: " + error.message);
+          }
         }
-      }
-    }
+      });
+    });
   </script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
-<body>
-  <h2>Cadastro</h2>
-  <input type="email" id="email" placeholder="Seu e-mail"><br>
-  <input type="password" id="senha" placeholder="Sua senha"><br>
-  <button onclick="cadastrarUsuario()">Cadastrar</button>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-sm">
+    <h1 class="text-2xl font-bold mb-6 text-center">Crie sua conta grátis</h1>
+    <form id="formCadastro" class="space-y-4">
+      <input type="text" id="nome" placeholder="Seu nome" required class="w-full px-4 py-2 border rounded" />
+      <input type="email" id="email" placeholder="Seu e-mail" required class="w-full px-4 py-2 border rounded" />
+      <input type="password" id="senha" placeholder="Crie uma senha" required class="w-full px-4 py-2 border rounded" />
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Cadastrar</button>
+    </form>
+    <p class="text-sm text-center mt-4">Já tem conta? <a href="login.html" class="text-blue-600">Entrar</a></p>
+  </div>
 </body>
 </html>
