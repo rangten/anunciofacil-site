@@ -1,105 +1,111 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculadora de Lucro - AnúncioFácil PRO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background-color: #f0f0f0;
-      color: #333;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
-    header {
-      background-color: #ffcc00;
-      padding: 20px;
-      text-align: center;
-    }
-    main {
-      max-width: 600px;
-      margin: 40px auto;
-      background-color: white;
-      padding: 30px;
+    .container {
+      background: #fff;
+      padding: 2rem;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    label {
-      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
     }
     input {
       width: 100%;
       padding: 10px;
-      margin: 10px 0 20px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      margin: 10px 0;
     }
     button {
-      background-color: #3483FA;
-      color: white;
-      padding: 12px;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
       width: 100%;
+      padding: 10px;
+      background: #2f57ef;
+      color: white;
+      border: none;
       cursor: pointer;
     }
-    .resultado {
-      margin-top: 30px;
-      background-color: #eaffea;
-      border-left: 4px solid #4CAF50;
-      padding: 15px;
-      display: none;
+    #mensagemErro {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Calculadora de Lucro</h1>
-  </header>
+  <div class="container">
+    <h2>Cadastro</h2>
+    <form id="formCadastro">
+      <input type="text" id="nome" placeholder="Seu nome" required />
+      <input type="email" id="email" placeholder="Seu email" required />
+      <input type="password" id="senha" placeholder="Sua senha" required />
+      <button type="submit">Cadastrar</button>
+      <div id="mensagemErro"></div>
+    </form>
+  </div>
 
-  <main>
-    <label for="custo">Custo do Produto (R$):</label>
-    <input type="number" id="custo" value="20" />
-
-    <label for="acrescimo">Acréscimo (frete, embalagem, etc) (R$):</label>
-    <input type="number" id="acrescimo" value="5" />
-
-    <label for="taxa">Taxa da Plataforma (%):</label>
-    <input type="number" id="taxa" value="16" />
-
-    <label for="imposto">Impostos (%):</label>
-    <input type="number" id="imposto" value="8" />
-
-    <label for="lucro">Margem de Lucro Desejada (%):</label>
-    <input type="number" id="lucro" value="20" />
-
-    <button onclick="calcular()">Calcular</button>
-
-    <div class="resultado" id="resultado">
-      <strong>Resultado:</strong><br>
-      Preço de venda sugerido: <span id="venda">R$ 0.00</span><br>
-      Lucro estimado: <span id="ganho">R$ 0.00</span>
-    </div>
-  </main>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
 
   <script>
-    function calcular() {
-      const custo = parseFloat(document.getElementById('custo').value);
-      const acrescimo = parseFloat(document.getElementById('acrescimo').value);
-      const taxa = parseFloat(document.getElementById('taxa').value) / 100;
-      const imposto = parseFloat(document.getElementById('imposto').value) / 100;
-      const lucro = parseFloat(document.getElementById('lucro').value) / 100;
+    // CONFIGURAÇÃO DO FIREBASE
+    const firebaseConfig = {
+      apiKey: "AIzaSyDht2RKa989sc46gFx1QD8Tm-siN6aZzFQ",
+      authDomain: "anuncio-facil-9bc0a.firebaseapp.com",
+      projectId: "anuncio-facil-9bc0a",
+    };
 
-      const base = custo + acrescimo;
-      const precoVenda = base / (1 - taxa - imposto - lucro);
-      const ganho = precoVenda - base;
+    // INICIALIZAR FIREBASE
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
-      document.getElementById('venda').innerText = `R$ ${precoVenda.toFixed(2)}`;
-      document.getElementById('ganho').innerText = `R$ ${ganho.toFixed(2)}`;
-      document.getElementById('resultado').style.display = 'block';
-    }
+    // FORMULÁRIO DE CADASTRO
+    document.getElementById('formCadastro').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const senha = document.getElementById('senha').value;
+
+      try {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, senha);
+        const user = userCredential.user;
+
+        await user.updateProfile({ displayName: nome });
+
+        const dataExpira = new Date();
+        dataExpira.setDate(dataExpira.getDate() + 7); // 7 dias grátis
+
+        await db.collection("usuarios").doc(user.uid).set({
+          nome: nome,
+          email: email,
+          plano: "Grátis",
+          planoExpira: dataExpira.toISOString(),
+        });
+
+        window.location.href = "painel.html";
+      } catch (error) {
+        const msg = document.getElementById('mensagemErro');
+        if (error.code === 'auth/email-already-in-use') {
+          msg.innerText = "Este e-mail já está em uso. Faça login ou use outro.";
+        } else if (error.code === 'auth/invalid-email') {
+          msg.innerText = "E-mail inválido.";
+        } else {
+          msg.innerText = "Erro ao cadastrar: " + error.message;
+        }
+      }
+    });
   </script>
 </body>
 </html>
