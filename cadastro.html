@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro – Anúncio Fácil IA</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-white min-h-screen flex items-center justify-center">
+  <div class="bg-gray-100 p-8 rounded shadow-md w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-4 text-center">Crie sua conta grátis</h1>
+    <form id="formCadastro" class="space-y-4">
+      <input type="text" id="nome" placeholder="Seu nome" required class="w-full border px-3 py-2 rounded" />
+      <input type="email" id="email" placeholder="Seu e-mail" required class="w-full border px-3 py-2 rounded" />
+      <input type="password" id="senha" placeholder="Crie uma senha" required class="w-full border px-3 py-2 rounded" />
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Cadastrar</button>
+    </form>
+    <p class="text-sm text-center mt-4">Já tem conta? <a href="login.html" class="text-blue-600">Entrar</a></p>
+  </div>
 
-  <!-- Firebase SDKs -->
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
   <script>
-    // Configuração Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyDht2RKa989sc46gFx1QD8Tm-siN6aZzFQ",
       authDomain: "anuncio-facil-9bc0a.firebaseapp.com",
@@ -21,56 +32,38 @@
       messagingSenderId: "770989904257",
       appId: "1:770989904257:web:07666e8c7558219e4f1880"
     };
-
-    // Inicializa Firebase
     firebase.initializeApp(firebaseConfig);
-  </script>
-</head>
-<body class="bg-white min-h-screen flex items-center justify-center">
-  <div class="bg-gray-100 p-8 rounded shadow-md w-full max-w-md">
-    <h1 class="text-xl font-bold text-center mb-6">Crie sua conta grátis</h1>
-    <form id="formCadastro" class="space-y-4">
-      <input type="text" id="nome" placeholder="Seu nome" required class="w-full border px-3 py-2 rounded"/>
-      <input type="email" id="email" placeholder="Seu e-mail" required class="w-full border px-3 py-2 rounded"/>
-      <input type="password" id="senha" placeholder="Crie uma senha" required minlength="6" class="w-full border px-3 py-2 rounded"/>
-      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Cadastrar</button>
-    </form>
-    <p class="text-sm text-center mt-4">Já tem conta? <a href="/anunciofacil-site/login.html" class="text-blue-600">Entrar</a></p>
-  </div>
 
-  <script>
     document.getElementById('formCadastro').addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const nome = document.getElementById('nome').value.trim();
-      const email = document.getElementById('email').value.trim();
+      const nome = document.getElementById('nome').value;
+      const email = document.getElementById('email').value;
       const senha = document.getElementById('senha').value;
-
-      if (!nome || !email || senha.length < 6) {
-        alert("Preencha todos os campos corretamente.");
-        return;
-      }
 
       try {
         const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, senha);
         const user = userCredential.user;
-
         await user.updateProfile({ displayName: nome });
 
         const db = firebase.firestore();
         const dataExpira = new Date();
-        dataExpira.setDate(dataExpira.getDate() + 7); // 7 dias grátis
+        dataExpira.setDate(dataExpira.getDate() + 7); // 7 dias de teste gratuito
 
         await db.collection('usuarios').doc(user.uid).set({
           nome: nome,
           email: email,
-          plano: "Grátis",
+          plano: 'Grátis',
           planoExpira: dataExpira.toISOString()
         });
 
-        window.location.href = "/anunciofacil-site/painel.html";
+        window.location.href = 'painel.html';
       } catch (error) {
-        alert("Erro ao cadastrar: " + error.message);
+        if (error.code === 'auth/email-already-in-use') {
+          alert('Este e-mail já está cadastrado. Tente outro ou faça login.');
+        } else {
+          alert('Erro ao cadastrar: ' + error.message);
+        }
       }
     });
   </script>
