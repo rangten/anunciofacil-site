@@ -2,27 +2,110 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cadastro</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #2f57ef;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #mensagemErro {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-  <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
-    <h1 class="text-2xl font-bold mb-6 text-center">Cadastro</h1>
-    <form id="formCadastro" class="space-y-4">
-      <input id="nome" type="text" placeholder="Seu nome" class="w-full border px-3 py-2 rounded" required />
-      <input id="email" type="email" placeholder="Seu e-mail" class="w-full border px-3 py-2 rounded" required />
-      <input id="senha" type="password" placeholder="Crie uma senha" class="w-full border px-3 py-2 rounded" required />
-      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Cadastrar</button>
+<body>
+  <div class="container">
+    <h2>Cadastro</h2>
+    <form id="formCadastro">
+      <input type="text" id="nome" placeholder="Seu nome" required />
+      <input type="email" id="email" placeholder="Seu email" required />
+      <input type="password" id="senha" placeholder="Sua senha" required />
+      <button type="submit">Cadastrar</button>
+      <div id="mensagemErro"></div>
     </form>
-    <p id="mensagem" class="text-red-500 text-sm mt-4 text-center"></p>
-    <p class="text-sm text-center mt-4">Já tem conta? <a href="login.html" class="text-blue-600">Entrar</a></p>
   </div>
 
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-  <script src="firebase-init.js"></script>
-  <script src="cadastro.js"></script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+
+  <script>
+    // CONFIGURAÇÃO DO FIREBASE
+    const firebaseConfig = {
+      apiKey: "AIzaSyDht2RKa989sc46gFx1QD8Tm-siN6aZzFQ",
+      authDomain: "anuncio-facil-9bc0a.firebaseapp.com",
+      projectId: "anuncio-facil-9bc0a",
+    };
+
+    // INICIALIZAR FIREBASE
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // FORMULÁRIO DE CADASTRO
+    document.getElementById('formCadastro').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const senha = document.getElementById('senha').value;
+
+      try {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, senha);
+        const user = userCredential.user;
+
+        await user.updateProfile({ displayName: nome });
+
+        const dataExpira = new Date();
+        dataExpira.setDate(dataExpira.getDate() + 7); // 7 dias grátis
+
+        await db.collection("usuarios").doc(user.uid).set({
+          nome: nome,
+          email: email,
+          plano: "Grátis",
+          planoExpira: dataExpira.toISOString(),
+        });
+
+        window.location.href = "painel.html";
+      } catch (error) {
+        const msg = document.getElementById('mensagemErro');
+        if (error.code === 'auth/email-already-in-use') {
+          msg.innerText = "Este e-mail já está em uso. Faça login ou use outro.";
+        } else if (error.code === 'auth/invalid-email') {
+          msg.innerText = "E-mail inválido.";
+        } else {
+          msg.innerText = "Erro ao cadastrar: " + error.message;
+        }
+      }
+    });
+  </script>
 </body>
 </html>
