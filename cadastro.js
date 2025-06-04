@@ -1,37 +1,43 @@
-document.getElementById('formCadastro').addEventListener('submit', async (e) => {
-  e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("formCadastro");
+  const erroElemento = document.getElementById("mensagemErro");
 
-  const nome = document.getElementById('nome').value;
-  const email = document.getElementById('email').value;
-  const senha = document.getElementById('senha').value;
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const nome = document.getElementById("nome").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const senha = document.getElementById("senha").value;
 
-  try {
-    // Cria o usuário no Firebase Auth
-    const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, senha);
-    const user = userCredential.user;
+    try {
+      const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, senha);
+      const user = userCredential.user;
 
-    // Atualiza o nome no perfil
-    await user.updateProfile({ displayName: nome });
+      await user.updateProfile({ displayName: nome });
 
-    // Salva os dados no Firestore
-    const db = firebase.firestore();
-    await db.collection('usuarios').doc(user.uid).set({
-      nome: nome,
-      email: email,
-      plano: 'Grátis',
-      planoExpira: gerarDataExpiracao(7) // 7 dias de teste grátis
-    });
+      const db = firebase.firestore();
+      const dataExpira = new Date();
+      dataExpira.setDate(dataExpira.getDate() + 7);
 
-    // Redireciona para o painel
-    window.location.href = 'painel.html';
-  } catch (error) {
-    alert('Erro ao cadastrar: ' + error.message);
+      await db.collection("usuarios").doc(user.uid).set({
+        nome: nome,
+        email: email,
+        plano: "Grátis",
+        planoExpira: dataExpira.toISOString(),
+      });
+
+      window.location.href = "painel.html";
+    } catch (error) {
+      erroElemento.textContent = traduzErro(error.code);
+    }
+  });
+
+  function traduzErro(codigo) {
+    const erros = {
+      "auth/email-already-in-use": "Este e-mail já está em uso. Faça login ou use outro e-mail.",
+      "auth/invalid-email": "E-mail inválido.",
+      "auth/weak-password": "A senha deve ter pelo menos 6 caracteres.",
+      default: "Erro ao cadastrar. Tente novamente.",
+    };
+    return erros[codigo] || erros.default;
   }
 });
-
-// Gera data de expiração no formato ISO
-function gerarDataExpiracao(dias) {
-  const data = new Date();
-  data.setDate(data.getDate() + dias);
-  return data.toISOString();
-}
